@@ -1,25 +1,19 @@
 create schema lab01;
 
---SET SEARCH_PATH TO lab01 ;
---GRANT USAGE ON SCHEMA lab01 TO andlem;
---create table lab01.uczestnik ( id_uczestnik int, nazwisko varchar(50), imie varchar(50) ) ;
---select * from lab01.uczestnik;
 create table lab01.uczestnik ( id_uczestnik int, nazwisko varchar(50), imie varchar(50) ) ;
 create table lab01.kurs ( id_kurs int, id_grupa int, id_nazwa int, termin varchar(50) ) ;
 create table lab01.wykladowca ( id_wykladowca int, nazwisko varchar(50), imie varchar(50) ) ;
 create table lab01.kurs_opis ( id_kurs int, opis varchar(50) ) ;
 create table lab01.uczest_kurs ( id_uczest int, id_kurs int ) ;
 create table lab01.wykl_kurs ( id_wykl int, id_kurs int ) ;
---
--- modyfikacja tabel - dodanie klucza glownego --
+
 alter table lab01.kurs add primary key (id_kurs) ;
 alter table lab01.uczestnik add primary key (id_uczestnik) ;
 alter table lab01.wykladowca add primary key (id_wykladowca) ;
 alter table lab01.kurs_opis add primary key (id_kurs) ;
 alter table lab01.uczest_kurs add primary key (id_uczest, id_kurs) ;
 alter table lab01.wykl_kurs add primary key (id_wykl, id_kurs) ;
---
--- modyfikacja tabel - dodanie refencji klucza obcego --
+
 alter table lab01.uczest_kurs add foreign key (id_uczest) references lab01.uczestnik ( id_uczestnik) ;
 alter table lab01.uczest_kurs add foreign key (id_kurs) references lab01.kurs ( id_kurs) ;
 alter table lab01.wykl_kurs add foreign key (id_kurs) references lab01.kurs ( id_kurs) ;
@@ -57,8 +51,7 @@ insert into lab01.uczestnik ( id_uczestnik, nazwisko, imie ) values
 (28, 'Wolf', 'Jacek'         ),
 (29, 'Kolczyński', 'Janusz'  ),
 (30, 'Chrobok', 'Mirosław'   )  ;
---
--- wstawienie danych - tabela kurs_opis
+
 insert into lab01.kurs_opis ( id_kurs, opis ) values
 ( 1, 'Język angielski, stopień 1'),
 ( 2, 'Język angielski, stopień 2'),
@@ -72,8 +65,7 @@ insert into lab01.kurs_opis ( id_kurs, opis ) values
 (10, 'Język hiszpański, stopień 1'),
 (11, 'Język hiszpański, stopień 2'),
 (12, 'Język hiszpański, stopień 3') ;
---
--- wstawienie danych - tabela wykladowca
+
 insert into lab01.wykladowca ( id_wykladowca, imie, nazwisko ) values 
 ( 1, 'Marcin','Szymczak'),
 ( 2, 'Joanna','Baranowska'),
@@ -90,8 +82,7 @@ insert into lab01.wykladowca ( id_wykladowca, imie, nazwisko ) values
 (13, 'Wiesław','Przybylski'),
 (14, 'Dorota','Tomaszewska'),
 (15, 'Jerzy','Wróblewski') ;
---
--- wstawienie danych - tabela kurs
+
 insert into lab01.kurs ( id_kurs, id_grupa, id_nazwa, termin ) values
 ( 1, 1, 1, '1.01.2021-31.03.2021'),
 ( 2, 2, 1, '1.01.2021-31.03.2021'),
@@ -104,8 +95,7 @@ insert into lab01.kurs ( id_kurs, id_grupa, id_nazwa, termin ) values
 ( 9, 1, 8, '1.07.2021-31.07.2021'),
 (10, 1, 10, '1.02.2021-31.05.2021'),
 (11, 1, 11, '1.09.2021-30.11.2021') ; 
---
--- wstawienie danych - tabela wykl_kurs - wykladowcy na kursach
+
 insert into lab01.wykl_kurs ( id_kurs, id_wykl ) values
 ( 1, 1 ),
 ( 2, 2 ),
@@ -118,8 +108,7 @@ insert into lab01.wykl_kurs ( id_kurs, id_wykl ) values
 ( 9, 4 ),
 (10, 11 ),
 (11, 11 ) ; 
---
--- wstawienie danych - tabela uczest_kurs - uczestnicy na kursach
+
 insert into lab01.uczest_kurs ( id_kurs, id_uczest ) values
 -- kurs 1 - angielski 1 gr 1
 ( 1, 1 ),
